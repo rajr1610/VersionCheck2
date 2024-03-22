@@ -15,12 +15,15 @@ jobs:
 
       - name: Set up Git
         run: |
-          git config user.name "Pramothkumar"
-          git config user.email "pramoth.kumar@netxd.com"
+          git config user.name "rajr1610"
+          git config user.email "r.ramanathan@netxd.com"
 
       - name: Get the latest tag
         id: get-latest-tag
-        run: echo ::set-output name=tag::$(git describe --tags --abbrev=0)
+        run: echo "tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+
+      - name: Use tag output
+        run: echo "The tag is ${{ env.tag }}"
 
       - name: Get previous tag old
         id: getPreVersion
