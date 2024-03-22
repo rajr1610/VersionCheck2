@@ -29,14 +29,14 @@ jobs:
         id: getPreVersion
         run: |
           git fetch --prune --unshallow
-          PREV_TAG=$(git describe --tags --abbrev=0 HEAD~1)
-          echo "Previous tag: $PREV_TAG"
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD~1)  >> $GITHUB_ENV
+          echo "Previous tag: ${{ env.PREV_TAG }}"
 
       - name: Get previous tag
         id: get_previous_tag
         run: |
-          previous_tag=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))
-          echo "Previous version in new : $previous_tag"
+          previous_tag=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1)) >> $GITHUB_ENV
+          echo "Previous version in new : ${{ env.previous_tag}}"
 
       
       - name: Bump version
